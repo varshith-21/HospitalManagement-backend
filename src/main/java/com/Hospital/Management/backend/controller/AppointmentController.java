@@ -17,7 +17,6 @@ import com.Hospital.Management.backend.service.AppointmentService;
 
 @RestController
 @RequestMapping("/api/appointments")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
