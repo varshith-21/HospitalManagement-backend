@@ -41,12 +41,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         String frontendUrl = System.getenv("FRONTEND_URL");
-        List<String> allowedOrigins = new java.util.ArrayList<>(
-            List.of("http://localhost:5173", "http://localhost:3000"));
         if (frontendUrl != null && !frontendUrl.isBlank()) {
-            allowedOrigins.add(frontendUrl.trim());
+            configuration.setAllowedOrigins(List.of(frontendUrl.trim(), "http://localhost:5173", "http://localhost:3000"));
+        } else {
+            configuration.setAllowedOriginPatterns(List.of("*"));
         }
-        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setAllowCredentials(true);
